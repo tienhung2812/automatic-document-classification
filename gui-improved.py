@@ -5,7 +5,7 @@
 # Created by: PyQt5 UI code generator 5.11.3
 #
 # WARNING! All changes made in this file will be lost!
-
+from ml import ADC
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_MainWindow(object):
@@ -30,6 +30,7 @@ class Ui_MainWindow(object):
         font.setFamily("Roboto")
         self.pushButton.setFont(font)
         self.pushButton.setObjectName("pushButton")
+        self.pushButton.clicked.connect(lambda:self.check(self.pushButton))
         self.frame = QtWidgets.QFrame(self.centralwidget)
         self.frame.setGeometry(QtCore.QRect(110, 100, 271, 81))
         self.frame.setFrameShape(QtWidgets.QFrame.Box)
@@ -82,7 +83,8 @@ class Ui_MainWindow(object):
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
-
+        # #Training ML
+        self.adc = ADC()
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -92,10 +94,21 @@ class Ui_MainWindow(object):
         self.lineEdit.setText(_translate("MainWindow", "Enter Text..."))
         self.pushButton.setText(_translate("MainWindow", "Check!"))
         self.label_3.setText(_translate("MainWindow", "Status:"))
-        self.label_2.setText(_translate("MainWindow", "TextLabel"))
+        # Status text
+        self.label_2.setText(_translate("MainWindow", "Training done!"))
         self.label_6.setText(_translate("MainWindow", "Type:"))
-        self.label_7.setText(_translate("MainWindow", "TextLabel"))
+        # Type text
+        self.label_7.setText(_translate("MainWindow", ""))
 
+    def check(self,pushButton):
+        self.label_7.setText("")
+        text = self.lineEdit.text()
+        print("\nChecking: "+text)
+        self.label_2.setText("Checking!")
+        predict = self.adc.Predict(text)
+        print("Result: "+predict)
+        self.label_2.setText("Done!")
+        self.label_7.setText(predict)
 
 if __name__ == "__main__":
     import sys
