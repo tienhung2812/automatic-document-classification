@@ -11,108 +11,193 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Automatic Document Classification</string>
+  </property>
+  <property name="unifiedTitleAndToolBarOnMac">
+   <bool>false</bool>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>240</x>
-      <y>360</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Check!</string>
-    </property>
-   </widget>
    <widget class="QLineEdit" name="lineEdit">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>160</x>
-      <y>200</y>
-      <width>241</width>
-      <height>121</height>
+      <x>111</x>
+      <y>184</y>
+      <width>569</width>
+      <height>150</height>
      </rect>
     </property>
+    <property name="minimumSize">
+     <size>
+      <width>569</width>
+      <height>150</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <family>Roboto</family>
+     </font>
+    </property>
     <property name="text">
-     <string>Enter Text</string>
+     <string>Enter Text...</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>160</x>
-      <y>30</y>
-      <width>251</width>
-      <height>91</height>
+      <x>350</x>
+      <y>340</y>
+      <width>80</width>
+      <height>33</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Roboto</family>
+     </font>
+    </property>
     <property name="text">
-     <string>Automatic document classification</string>
-    </property>
-    <property name="textFormat">
-     <enum>Qt::RichText</enum>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
+     <string>Check!</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_3">
+   <widget class="QFrame" name="frame">
     <property name="geometry">
      <rect>
-      <x>170</x>
-      <y>140</y>
-      <width>47</width>
-      <height>13</height>
+      <x>110</x>
+      <y>100</y>
+      <width>271</width>
+      <height>81</height>
      </rect>
     </property>
-    <property name="text">
-     <string>Status:</string>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
     </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="lineWidth">
+     <number>0</number>
+    </property>
+    <widget class="QSplitter" name="splitter">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>17</y>
+       <width>211</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <widget class="QLabel" name="label_3">
+      <property name="minimumSize">
+       <size>
+        <width>90</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>Roboto</family>
+       </font>
+      </property>
+      <property name="text">
+       <string>Status:</string>
+      </property>
+      <property name="margin">
+       <number>12</number>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="font">
+       <font>
+        <family>Roboto</family>
+       </font>
+      </property>
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+      <property name="margin">
+       <number>0</number>
+      </property>
+      <property name="indent">
+       <number>1</number>
+      </property>
+     </widget>
+    </widget>
    </widget>
-   <widget class="QLabel" name="label_4">
+   <widget class="QFrame" name="frame_2">
     <property name="geometry">
      <rect>
-      <x>180</x>
-      <y>410</y>
-      <width>47</width>
-      <height>13</height>
+      <x>110</x>
+      <y>370</y>
+      <width>271</width>
+      <height>81</height>
      </rect>
     </property>
-    <property name="text">
-     <string>Type:</string>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
     </property>
-   </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>250</x>
-      <y>140</y>
-      <width>47</width>
-      <height>13</height>
-     </rect>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
     </property>
-    <property name="text">
-     <string>TextLabel</string>
+    <property name="lineWidth">
+     <number>0</number>
     </property>
-   </widget>
-   <widget class="QLabel" name="label_5">
-    <property name="geometry">
-     <rect>
-      <x>250</x>
-      <y>410</y>
-      <width>47</width>
-      <height>13</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>TextLabel</string>
-    </property>
+    <widget class="QSplitter" name="splitter_2">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>17</y>
+       <width>211</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <widget class="QLabel" name="label_6">
+      <property name="minimumSize">
+       <size>
+        <width>90</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>Roboto</family>
+       </font>
+      </property>
+      <property name="text">
+       <string>Type:</string>
+      </property>
+      <property name="margin">
+       <number>12</number>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_7">
+      <property name="font">
+       <font>
+        <family>Roboto</family>
+       </font>
+      </property>
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+      <property name="margin">
+       <number>0</number>
+      </property>
+      <property name="indent">
+       <number>1</number>
+      </property>
+     </widget>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -121,7 +206,7 @@
      <x>0</x>
      <y>0</y>
      <width>801</width>
-     <height>21</height>
+     <height>27</height>
     </rect>
    </property>
   </widget>
