@@ -7,10 +7,24 @@ import sys
 targetData = 5000
 
 class NewsCrawler:
+    def getRssLinkList(self,url):
+          print("Fetching "+url+" ...")
+          
+          try:
+            page_source = urllib.request.urlopen(url)
+            html = page_source.read().decode("utf8")
+            bsObj = BeautifulSoup(html,"html.parser")
+            for item in bsObj.find_all("item"):
+                text = item.text.splitlines()
+                self.waitingList.append(text[3])
+            return result
+          except:
+            print("getLinkList Error")
     def getLinkList(self,url):
         print("Fetching "+url+" ...")
         result = []
         try:
+          
           page_source = urllib.request.urlopen(url)
           html = page_source.read()
           bsObj = BeautifulSoup(html,"html.parser")
@@ -20,7 +34,7 @@ class NewsCrawler:
             
             #Check crawled?
             shouldAdd = True
-            if link['href'].find("https://")<0 and link['href'].find("http://")<0 :
+            if link['href'].find("https://www.bbc")<0 and link['href'].find("http://www.bbc")<0 :
               shouldAdd = False
             if link['href'].find("www.bbc")<0:
               shouldAdd = False
@@ -157,6 +171,17 @@ class NewsCrawler:
         self.content = []
         self.waitingList = ["https://www.bbc.co.uk/"]
         self.crawledList = []
+        en = "http://feeds.bbci.co.uk/news/entertainment_and_arts/rss.xml"
+        te = "http://feeds.bbci.co.uk/news/technology/rss.xml"
+        bu = "http://feeds.bbci.co.uk/news/business/rss.xml"
+        po = "http://feeds.bbci.co.uk/news/politics/rss.xml"
+        sp = "http://feeds.bbci.co.uk/sport/rss.xml"
+        self.getRssLinkList(en)
+        self.getRssLinkList(te)
+        self.getRssLinkList(bu)
+        self.getRssLinkList(po)
+        self.getRssLinkList(sp)
+        
         while len(self.waitingList)>0:
           self.getLinkList(self.waitingList.pop(0))
           print(self.waitingList)
