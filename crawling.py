@@ -3,27 +3,10 @@ import time
 import pandas as pd
 from google.colab import files
 from bs4 import BeautifulSoup
-from google.colab import auth
-auth.authenticate_user()
-from googleapiclient.discovery import build
-drive_service = build('drive', 'v3')
-from IPython.display import HTML, display
 import sys
 
 targetData = 5000
 
-
-def progress(value, max):
-    return HTML("""
-        <progress
-            value='{value}'
-            max='{max}',
-            style='width: 100%'
-        >
-            {value}
-        </progress>
-    """.format(value=value, max=max))
-    # print(str(text.find("http"))+" " + str(text.find("</link>")))
 class NewsCrawler:
     def getLinkList(self,url):
         print("Fetching "+url+" ...")
@@ -133,21 +116,7 @@ class NewsCrawler:
       dataSet = list(zip(self.category,self.filename,self.title,self.content))
       df = pd.DataFrame(data = dataSet, columns=['category', 'filename','title','content'])
       print("Exporting data...")
-      df.to_csv('data.csv',index=False,header=True)
-      from googleapiclient.http import MediaFileUpload
-
-      file_metadata = {
-        'name': 'crawledData.csv',
-        'mimeType': 'text/plain'
-      }
-      media = MediaFileUpload('data.csv', 
-                              mimetype='text/plain',
-                              resumable=True)
-      created = drive_service.files().create(body=file_metadata,
-                                             media_body=media,
-                                             fields='id').execute()
-      print('File ID: {}'.format(created.get('id')))
-      print("Done")
+      df.to_csv('crawled.csv',index=False,header=True)
       sys.exit()
     def crawling(self,data):
                
