@@ -1,7 +1,6 @@
 import urllib.request
 import time
 import pandas as pd
-from google.colab import files
 from bs4 import BeautifulSoup
 import sys
 
