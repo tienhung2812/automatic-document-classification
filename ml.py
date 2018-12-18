@@ -160,14 +160,14 @@ class ADC:
 
         from sklearn.linear_model import LogisticRegression
         from sklearn.ensemble import RandomForestClassifier
-        from sklearn.naive_bayes import MultinomialNB
+        from sklearn.neighbors import KNeighborsClassifier
 
         from sklearn.model_selection import cross_val_score
 
 
         models = [
             RandomForestClassifier(n_estimators=200, max_depth=3, random_state=0),
-            MultinomialNB(),
+            KNeighborsClassifier(n_neighbors=49),
             LogisticRegression(random_state=0),
         ]
         CV = 5
@@ -184,56 +184,56 @@ class ADC:
         sns.boxplot(x='model_name', y='accuracy', data=cv_df)
         sns.stripplot(x='model_name', y='accuracy', data=cv_df, 
                     size=8, jitter=True, edgecolor="gray", linewidth=2)
+        print("Accuracy")
+        print(cv_df.groupby('model_name').accuracy.mean())
 
-        cv_df.groupby('model_name').accuracy.mean()
 
+        # from sklearn.model_selection import train_test_split
 
-        from sklearn.model_selection import train_test_split
+        # self.model = LogisticRegression(random_state=0)
 
-        self.model = LogisticRegression(random_state=0)
+        # X_train, X_test, y_train, y_test, indices_train, indices_test = train_test_split(features, labels, df.index, test_size=0.33, random_state=0)
+        # self.model.fit(X_train, y_train)
+        # y_pred_proba = self.model.predict_proba(X_test)
+        # y_pred = self.model.predict(X_test)
 
-        X_train, X_test, y_train, y_test, indices_train, indices_test = train_test_split(features, labels, df.index, test_size=0.33, random_state=0)
-        self.model.fit(X_train, y_train)
-        y_pred_proba = self.model.predict_proba(X_test)
-        y_pred = self.model.predict(X_test)
+        # from sklearn.metrics import confusion_matrix
+        # import seaborn as sns
 
-        from sklearn.metrics import confusion_matrix
-        import seaborn as sns
+        # conf_mat = confusion_matrix(y_test, y_pred)
+        # sns.heatmap(conf_mat, annot=True, fmt='d',
+        #             xticklabels=category_id_df.category.values, yticklabels=category_id_df.category.values)
+        # plt.ylabel('Actual')
+        # plt.xlabel('Predicted')
 
-        conf_mat = confusion_matrix(y_test, y_pred)
-        sns.heatmap(conf_mat, annot=True, fmt='d',
-                    xticklabels=category_id_df.category.values, yticklabels=category_id_df.category.values)
-        plt.ylabel('Actual')
-        plt.xlabel('Predicted')
+        # from IPython.display import display
 
-        from IPython.display import display
-
-        for predicted in category_id_df.category_id:
-            for actual in category_id_df.category_id:
-                if predicted != actual and conf_mat[actual, predicted] >= 2:
-                    print("'{}' predicted as '{}' : {} examples.".format(self.id_to_category[actual], self.id_to_category[predicted], conf_mat[actual, predicted]))
-                    display(df.loc[indices_test[(y_test == actual) & (y_pred == predicted)]][['title', 'content']])
-                    print('')
-
-        
-
-        self.model.fit(features, labels)
-
-        from sklearn.feature_selection import chi2
-
-        N = 5
-        for category, category_id in sorted(category_to_id.items()):
-            indices = np.argsort(self.model.coef_[category_id])
-            feature_names = np.array(self.tfidf.get_feature_names())[indices]
-            unigrams = [v for v in reversed(feature_names) if len(v.split(' ')) == 1][:N]
-            bigrams = [v for v in reversed(feature_names) if len(v.split(' ')) == 2][:N]
-            print("# '{}':".format(category))
-            print("  . Top unigrams:\n       . {}".format('\n       . '.join(unigrams)))
-            print("  . Top bigrams:\n       . {}".format('\n       . '.join(bigrams)))
+        # for predicted in category_id_df.category_id:
+        #     for actual in category_id_df.category_id:
+        #         if predicted != actual and conf_mat[actual, predicted] >= 2:
+        #             print("'{}' predicted as '{}' : {} examples.".format(self.id_to_category[actual], self.id_to_category[predicted], conf_mat[actual, predicted]))
+        #             display(df.loc[indices_test[(y_test == actual) & (y_pred == predicted)]][['title', 'content']])
+        #             print('')
 
         
-        trainingtime = datetime.now()-createdatatime-dataexplorationtime-start
-        df[df.content.str.lower().str.contains('news website')].category.value_counts()
+
+        # self.model.fit(features, labels)
+
+        # from sklearn.feature_selection import chi2
+
+        # N = 5
+        # for category, category_id in sorted(category_to_id.items()):
+        #     indices = np.argsort(self.model.coef_[category_id])
+        #     feature_names = np.array(self.tfidf.get_feature_names())[indices]
+        #     unigrams = [v for v in reversed(feature_names) if len(v.split(' ')) == 1][:N]
+        #     bigrams = [v for v in reversed(feature_names) if len(v.split(' ')) == 2][:N]
+        #     print("# '{}':".format(category))
+        #     print("  . Top unigrams:\n       . {}".format('\n       . '.join(unigrams)))
+        #     print("  . Top bigrams:\n       . {}".format('\n       . '.join(bigrams)))
+
+        
+        # trainingtime = datetime.now()-createdatatime-dataexplorationtime-start
+        # df[df.content.str.lower().str.contains('news website')].category.value_counts()
 
         
     def Predict(self,raw_text):
@@ -245,4 +245,6 @@ class ADC:
             # print("  - Predicted as: '{}'".format(self.id_to_category[predicted]))
             # print("")
             return self.id_to_category[predicted]
+adc = ADC()
+print(adc.Predict("sffs"))
     
