@@ -100,7 +100,6 @@ class ADC:
         print("Exporting data...")
         df.to_csv('data.csv',index=False,header=True)
         print("Done")
-
         createdatatime = datetime.now()-start
 
         df['category_id'] = df['category'].factorize()[0]

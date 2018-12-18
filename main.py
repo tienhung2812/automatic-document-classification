@@ -15,14 +15,14 @@ class Ui_MainWindow(object):
         MainWindow.setUnifiedTitleAndToolBarOnMac(False)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit = QtWidgets.QPlainTextEdit(self.centralwidget)
         self.lineEdit.setEnabled(True)
         self.lineEdit.setGeometry(QtCore.QRect(111, 184, 569, 150))
         self.lineEdit.setMinimumSize(QtCore.QSize(569, 150))
         font = QtGui.QFont()
         font.setFamily("Roboto")
         self.lineEdit.setFont(font)
-        self.lineEdit.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
+        # self.lineEdit.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
         self.lineEdit.setObjectName("lineEdit")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(350, 340, 80, 33))
@@ -91,7 +91,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Automatic Document Classification"))
-        self.lineEdit.setText(_translate("MainWindow", "Enter Text..."))
+        self.lineEdit.setPlainText(_translate("MainWindow", "Enter here"))
         self.pushButton.setText(_translate("MainWindow", "Check!"))
         self.label_3.setText(_translate("MainWindow", "Status:"))
         # Status text
@@ -102,7 +102,7 @@ class Ui_MainWindow(object):
 
     def check(self,pushButton):
         self.label_7.setText("")
-        text = self.lineEdit.text()
+        text = self.lineEdit.toPlainText()
         print("\nChecking: "+text)
         self.label_2.setText("Checking!")
         predict = self.adc.Predict(text)

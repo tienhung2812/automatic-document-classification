@@ -25,7 +25,6 @@ class NewsCrawler:
         print("Fetching "+url+" ...")
         result = []
         try:
-          
           page_source = urllib.request.urlopen(url)
           html = page_source.read()
           bsObj = BeautifulSoup(html,"html.parser")
